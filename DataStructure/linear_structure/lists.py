@@ -146,6 +146,25 @@ class SinglyLinkedList:
 	def index(self, item):
 		pass
 
+	def reverse(self):
+		pointer = self.head
+		previous = None
+		temp_tail = self.head
+		while pointer:
+			temp = pointer.next
+			pointer.next = previous
+			previous = pointer
+			pointer = temp
+		self.tail = temp_tail
+		self.head = previous
+
+		start,end = 0, len(self)-1
+		while start < end:
+			self.internal_stack[start], self.internal_stack[end] = self.internal_stack[end], self.internal_stack[start]
+			start+=1
+			end-=1
+
+
 
 	def __len__(self):
 		return self.list_size
@@ -196,21 +215,13 @@ class SinglyLinkedList:
 
 if __name__ == '__main__':
 	c = SinglyLinkedList()
-	d = SinglyLinkedList()
-	lst1 = [1,2,3,4]
-	lst2 = [5,6,7,8]
-	c.to_sll(lst1)
-	d.to_sll(lst2)
-
-	c+d
+	lst = [1,2,3,4,5,6]
+	c.to_sll(lst)
 	c.display()
-	print(c.head.val, c.tail.val)
 	print([i.val for i in c.internal_stack])
-	print(c.to_list())
-	print(c<d)
-
-
-
+	c.reverse()
+	c.display()
+	print([i.val for i in c.internal_stack])
 
 
 
