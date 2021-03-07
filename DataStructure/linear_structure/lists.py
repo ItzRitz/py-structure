@@ -13,11 +13,13 @@ class _Doubly_Node:
 
 class SinglyLinkedList:
 
-	def __init__(self):
+	def __init__(self, arr=None):
 		self.head = None
 		self.tail = None
 		self.internal_stack = []
 		self.list_size = 0
+		self.arr = arr
+		self._to_sll()
 	
 	def _add_to_stack(self, node, index=-1):
 		if index>-1:
@@ -137,11 +139,12 @@ class SinglyLinkedList:
 		return self.list_size
 
 	def is_there(self, item):
-		isFound = filter(lambda x: x.val==item, self.internal_stack)
-		return True if isFound else False
+		return list(filter(lambda x: x.val==item, self.internal_stack))
 
-	def to_sll(self, array):
-		for element in array:
+	def _to_sll(self):
+		if self.arr is None:
+			return
+		for element in self.arr:
 			self.append(element)
 
 	def to_dbll(self):
@@ -158,9 +161,6 @@ class SinglyLinkedList:
 			lst.append(pointer.val)
 			pointer = pointer.next
 		return lst
-
-	def index(self, item):
-		pass
 
 	def reverse(self):
 		pointer = self.head
@@ -179,6 +179,20 @@ class SinglyLinkedList:
 			self.internal_stack[start], self.internal_stack[end] = self.internal_stack[end], self.internal_stack[start]
 			start+=1
 			end-=1
+
+	def sort(self, reverse=False):
+		if self.head is None:
+			return None
+
+		sort = sorted(self.internal_stack, key=lambda x:x.val, reverse=reverse)
+
+		for i in range(len(sort)-1):
+			sort[i].next = sort[i+1]
+
+		self.head = sort[0]
+		self.tail = sort[-1]
+
+		return self.head
 
 	def __len__(self):
 		return self.list_size
@@ -233,11 +247,13 @@ class SinglyLinkedList:
 
 class DoublyLinkedList:
 
-	def __init__(self):
+	def __init__(self, arr=None):
 		self.head = None
 		self.tail = None
 		self.internal_stack = []
 		self.list_size = 0
+		self.arr = arr
+		self._to_dbll()
 	
 	def _add_to_stack(self, node, index=-1):
 		if index>-1:
@@ -378,8 +394,7 @@ class DoublyLinkedList:
 		return self.list_size
 
 	def is_there(self, item):
-		isFound = filter(lambda x: x.val==item, self.internal_stack)
-		return True if isFound else False
+		return list(filter(lambda x: x.val==item, self.internal_stack))
 
 	def to_sll(self):
 		lst = self.to_list()
@@ -388,8 +403,10 @@ class DoublyLinkedList:
 
 		return sll
 
-	def to_dbll(self, array):
-		for element in array:
+	def _to_dbll(self):
+		if self.arr is None:
+			return
+		for element in self.arr:
 			self.append(element)
 
 	def to_list(self, head=None):
@@ -428,17 +445,26 @@ class DoublyLinkedList:
 		self.tail = other.tail
 		self.internal_stack += other.internal_stack
 
-	# Methods to add --> sort, to_bst, to_dbll
+	def sort(self, reverse=False):
+		temp = sorted(self.internal_stack, key=lambda x:x.val, reverse=reverse)
+
+		for i in range(len(temp)-1):
+			temp[i].next = temp[i+1]
+			temp[i+1].prev = temp[i]
+		self.head = temp[0]
+		self.tail = temp[-1]
+
+		return self.head
+
+	# Methods to add --> to_bst
 	def __reversed__(self):
 		self.reverse()
 
 if __name__ == '__main__':
-	l = SinglyLinkedList()
-
-	arr = ["h", 'e', 'l','l','o']
-
-	l.to_sll(arr)
-
+	l = SinglyLinkedList(['h'])
+	l.sort(reverse=False)
+	l.pop()
+	print(l.sort(reverse=False))
 	l.display()
 
 

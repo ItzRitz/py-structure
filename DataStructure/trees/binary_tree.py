@@ -14,8 +14,12 @@ class _Node:
 		self.right = None
 
 class BinarySearchTree:
-	def __init__(self):
+
+	def __init__(self, arr=None):
 		self.root = None
+		self.arr = arr
+		self._to_bst()
+		
 
 	def insert(self, val):
 		node = _Node(val)
@@ -79,6 +83,11 @@ class BinarySearchTree:
 		print(res)
 
 	def delete(self, element):
+		if self.root is None:
+			return None
+		if element == self.root.val and not self.root.right and not self.root.left:
+			self.root = None
+
 		def _delete(root, element):
 			if not root:
 				return None
@@ -124,30 +133,168 @@ class BinarySearchTree:
 		node = _search(self.root, element)
 		return node if node else "Node Not Found"
 
-	def to_bst(self, arr):
+	def _to_bst(self):
+		for element in self.arr:
+			self.insert(element)
+
+	def leaf_order(self): # Needs fixing
+		if self.root is None:
+			return None
+		c = 0
+		stack = [self.root]
+		res = []
+		while stack:
+			l = len(stack)
+			temp = []
+			for _ in range(l):
+				node = stack.pop(0)
+				if node:
+					temp.append(node.val)
+				else:
+					if len(stack)>1:
+						temp.append(None)
+					continue
+
+
+				if node.left:
+					stack.append(node.left)
+				else:
+					stack.append(None)
+				if node.right:
+					stack.append(node.right)
+				else:
+					stack.append(None)
+			if temp != []:
+				res.append(temp)
+
+		return res
+
+	def max(self):
+
+		if self.root is None:
+			return None
+		
+		def _max(node):
+			if node.right is None:
+				return node
+			else:
+				return _max(node.right)
+			
+		return _max(self.root).val
+
+	def min(self):
+
+		if self.root is None:
+			return None
+		
+		def _min(node):
+			if node.left is None:
+				return node
+			else:
+				return _min(node.left)
+			
+		return _min(self.root).val
+
+class BinaryTree: # Under work
+	
+	def __init__(self, arr=None):
+		self.root = None
+		self.arr = arr
+
+	def insert(self, val):
+		node = _Node(val)
+		if self.root is None:
+			self.root = node
+		 #   
+
+	def inorder(self):
+		if self.root is None:
+			print('Empty Tree')
+			return
+		res = []
+		def _inorder(node):
+			if node:
+				_inorder(node.left)
+				res.append(node.val)
+				_inorder(node.right)
+		_inorder(self.root)
+		print(res)
+
+	def delete(self, element):
+		pass
+
+	def search(self, element):
+		pass
+
+	def to_bt(self, arr):
 		for element in arr:
 			self.insert(element)
 
 	def leaf_order(self):
 		if self.root is None:
 			return None
+		c = 0
 		stack = [self.root]
-		res = [self.root.val]
+		res = []
 		while stack:
-			pass
+			l = len(stack)
+			temp = []
+			for _ in range(l):
+				node = stack.pop(0)
+				if node:
+					temp.append(node.val)
+				else:
+					if len(stack)>1:
+						temp.append(None)
+					continue
+
+
+				if node.left:
+					stack.append(node.left)
+				else:
+					stack.append(None)
+				if node.right:
+					stack.append(node.right)
+				else:
+					stack.append(None)
+			if temp != []:
+				res.append(temp)
+
+		return res
+
+	def max(self):
+
+		if self.root is None:
+			return None
+		
+		def _max(node):
+			if node.right is None:
+				return node
+			else:
+				return _max(node.right)
+			
+		return _max(self.root).val
+
+	def min(self):
+
+		if self.root is None:
+			return None
+		
+		def _min(node):
+			if node.left is None:
+				return node
+			else:
+				return _min(node.left)
+			
+		# return _min(self.root).val
+
+
+
 
 
 if __name__ == '__main__':
-	t = BinarySearchTree()
+	t = BinarySearchTree([5,2,6,7,3,1,5,7,10])
 	t.insert(5)
-	t.insert(1)
-	t.insert(3)
-	t.insert(7)
-	t.insert(4)
-	t.insert(8)
-	t.preorder()
-	t.inorder()
-	t.postorder()
-	t.delete(-4)
-	t.inorder()
-	# print(t.search(8))
+	# t.delete(5)
+	print(t.leaf_order()) # Causing error needs fix
+	# t.preorder()
