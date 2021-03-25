@@ -13,6 +13,17 @@
         classes - BinarySearchTree, BinaryTree
     
     import eg - from trees.binary_tree import BinarySearchTree
+
+### 3. sorting
+    modules - sort.py
+        functions - bubble_sort, insertion_sort, selection_sort, merge_sort, quick_sort, quick_sort_3way
+    
+    import eg - from sorting.sort import merge_sort
+    
+    Function defination - 
+        function_name(arr, show_steps=False, reversed=False)
+        1. show_steps = True will show the intermediate steps in the sorting process
+        2. reversed = True will sort the array in reversed order
     
 
 ## Classes
@@ -25,4 +36,3 @@
     
     3. BinarySearchTree - Binary Search Tree implementation
     
-    4. BinaryTree - Binary Tree implementation
