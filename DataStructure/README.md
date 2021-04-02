@@ -24,15 +24,13 @@
         function_name(arr, show_steps=False, reversed=False)
         1. show_steps = True will show the intermediate steps in the sorting process
         2. reversed = True will sort the array in reversed order
+  
+ ### 4. heaps
+    modules - heap.py
+        classes - MinHeap, MaxHeap
+       
+    import eg - from heaps.heap import MaxHeap
     
+   
 
-## Classes
-
-    1. SinglyLinkedList - Singly Linked List implementation
-        upon creating the object of the class, call the help() method to get more info on other methods
-    
-    2. DoublyLinkedList - Doubly Linked List implementation
-        upon creating the object of the class, call the help() method to get more info on other methods
-    
-    3. BinarySearchTree - Binary Search Tree implementation
     
