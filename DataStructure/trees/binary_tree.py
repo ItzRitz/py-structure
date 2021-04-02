@@ -1,4 +1,4 @@
-# from ..linear_structure.lists import SinglyLinkedList, DoublyLinkedList
+# from linear_structure.lists import SinglyLinkedList, DoublyLinkedList
 
 
 class _Node:

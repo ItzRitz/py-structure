@@ -177,25 +177,3 @@ if __name__ == '__main__':
 	print("Result array :", arri)
 	t1 = time.time() - t
 	print("Time Elapsed : ",t1, " seconds")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
